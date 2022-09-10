@@ -11,7 +11,7 @@ class BallPit {
     private final List<Ball> balls = new ArrayList<>();
     private long tickCount = 0;
 
-    private boolean blue;
+    private boolean blueCollision;
 
     BallPit(double width, double height, double frameDuration) {
         this.height = height;
@@ -19,9 +19,9 @@ class BallPit {
 
         g = 1.0 * frameDuration;
 
-//        balls.add(new Ball(100, 100, 20, "RED"));
+        balls.add(new Ball(100, 100, 20, "RED"));
         balls.add(new Ball(200, 200, 20, "BLACK"));
-//        balls.add(new Ball(300, 300, 20, "BLUE"));
+        balls.add(new Ball(300, 300, 20, "BLUE"));
     }
 
     double getHeight() {
@@ -42,25 +42,25 @@ class BallPit {
             if (ball.getxPos() + ball.getRadius() > width) {
                 ball.setxPos(width - ball.getRadius());
                 ball.setxVel(ball.getxVel() * -1);
-                if (ball.getCol().equalsIgnoreCase("blue")) blue = false;
+//                if (ball.getCol().equalsIgnoreCase("blue")) blue = false;
 
             }
             if (ball.getxPos() - ball.getRadius() < 0) {
                 ball.setxPos(0 + ball.getRadius());
                 ball.setxVel(ball.getxVel() * -1);
-                if (ball.getCol().equalsIgnoreCase("blue")) blue = false;
+//                if (ball.getCol().equalsIgnoreCase("blue")) blue = false;
 
             }
             if (ball.getyPos() + ball.getRadius() > height) {
                 ball.setyPos(height - ball.getRadius());
                 ball.setyVel(ball.getyVel() * -1);
-                if (ball.getCol().equalsIgnoreCase("blue")) blue = false;
+//                if (ball.getCol().equalsIgnoreCase("blue")) blue = false;
 
             }
             if (ball.getyPos() - ball.getRadius() < 0) {
                 ball.setyPos(0 + ball.getRadius());
                 ball.setyVel(ball.getyVel() * -1);
-                if (ball.getCol().equalsIgnoreCase("blue")) blue = false;
+//                if (ball.getCol().equalsIgnoreCase("blue")) blue = false;
 
             }
 
@@ -73,11 +73,11 @@ class BallPit {
                 if (checkCollision(ball, ballB)) {
 //                    System.out.println("collided");
                     handleCollision(ball, ballB);
-                    if (ball.getCol().equalsIgnoreCase("blue") || ballB.getCol() == "blue") blue = true;
+                    if (ball.getCol().equalsIgnoreCase("blue") || ballB.getCol() == "blue") blueCollision = true;
                 }
             }
 
-            ball.think(blue);
+            ball.think(blueCollision);
 
         }
     }

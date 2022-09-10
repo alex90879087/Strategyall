@@ -74,7 +74,7 @@ public class Ball {
         this.yPos = yPos;
     }
 
-    void think(boolean blue) {
+    void think(boolean blueCollision) {
         // Here is where the strategy should have some effect.
         // You can add parameters to the think method so the ball knows something about its
         // world to make decisions with, or you can inject things upon construction for it to query
@@ -85,7 +85,7 @@ public class Ball {
             this.move(new redStrat());
         }
         else if (getCol().equalsIgnoreCase("blue")){
-            this.move(new blueStrat(blue));
+            this.move(new blueStrat(blueCollision));
         }else{
             System.out.println("New coloured ball detected!");
         }

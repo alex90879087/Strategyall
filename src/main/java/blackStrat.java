@@ -21,15 +21,32 @@ public class blackStrat implements Strategy{
         double coordX = coord == 2 ? 800 : coord == 3 ? 800 : 0;
         double coordY = coord == 1 ? 600 : coord == 2 ? 600: 0;
 
-        double angle = Math.atan2(coordX - ball.getxPos(), coordY - ball.getyPos());
+        if (coord == 0) {
+            ball.setxVel(ball.getxVel() - 0.017);
+            ball.setyVel(ball.getyVel() - 0.017);
+        }
+        else if (coord == 1){
+            ball.setxVel(ball.getxVel() - 0.017);
+            ball.setyVel(ball.getyVel() + 0.017);
+        }
+        else if (coord == 2){
+            ball.setxVel(ball.getxVel() + 0.017);
+            ball.setyVel(ball.getyVel() + 0.017);
+        }
+        else{
+            ball.setxVel(ball.getxVel() + 0.017);
+            ball.setyVel(ball.getyVel() - 0.017);
+        }
 
-        double factor = (ball.getxVel() > 3) ? 0.4:0.30;
-
-        double speedX = factor * Math.sin(angle);
-        double speedY = factor * Math.cos(angle);
-
-        ball.setxPos(ball.getxPos() + speedX);
-        ball.setyPos(ball.getyPos() + speedY);
+//        double angle = Math.atan2(coordX - ball.getxPos(), coordY - ball.getyPos());
+//
+////        double factor = (ball.getxVel() > 3) ? 0.4:0.30;
+//        double factor = 0.017;
+//        double speedX = factor * Math.sin(angle);
+//        double speedY = factor * Math.cos(angle);
+//
+//        ball.setxPos(ball.getxPos() + speedX);
+//        ball.setyPos(ball.getyPos() + speedY);
 
     }
 
