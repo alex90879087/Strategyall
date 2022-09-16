@@ -1,4 +1,4 @@
-public interface Strategy {
+interface Strategy {
 
     void move(Ball ball);
 }

@@ -8,12 +8,10 @@ public class blueStrat implements Strategy{
     @Override
     public void move(Ball ball) {
         if (collision) {
-            if (ball.getxVel() >= 0.001) ball.setxVel(ball.getxVel() - 0.001);
-            else if (ball.getxVel() <= -0.001) ball.setxVel(ball.getxVel() + 0.001);
+            if (ball.getxVel() >= 0.01) ball.setxVel(ball.getxVel() - 0.01);
+            else if (ball.getxVel() <= -0.01) ball.setxVel(ball.getxVel() + 0.01);
             if (ball.getyVel() >= 0.01) ball.setyVel(ball.getyVel() - 0.01);
             else if (ball.getyVel() <= -0.01) ball.setyVel(ball.getyVel() + 0.01);
-
-
         }
 
     }

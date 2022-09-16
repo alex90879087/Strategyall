@@ -1,9 +1,11 @@
 import javafx.scene.paint.Paint;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-public class Ball {
+public class Ball implements Subject {
     private double xPos;
     private double yPos;
     private double radius;
@@ -12,6 +14,7 @@ public class Ball {
     private Paint colour;
     private Strategy strat;
     private String col;
+    private List<ObserverInterface> observers = new ArrayList<>();
 
     Ball(double startX, double startY, double startRadius, String colour) {
         this.xPos = startX;
@@ -44,11 +47,11 @@ public class Ball {
         return radius;
     }
 
-    double getxPos() {
+    public double getxPos() {
         return xPos;
     }
 
-    double getyPos() {
+    public double getyPos() {
         return yPos;
     }
 
@@ -56,7 +59,20 @@ public class Ball {
         return colour;
     }
 
-    String getCol() {return col;}
+    @Override
+    public void attach(ObserverInterface observer) { observers.add(observer); }
+
+    @Override
+    public void detach(ObserverInterface observer) { observers.remove(observer); }
+
+    @Override
+    public void alert() {
+        for (ObserverInterface observer: observers){
+            observer.update();
+        }
+    }
+
+    public String getCol() {return col;}
 
     double getxVel() {
         return xVel;
