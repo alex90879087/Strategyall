@@ -12,6 +12,7 @@ class BallPit {
     private long tickCount = 0;
     private boolean blueCollision;
 
+
     BallPit(double width, double height, double frameDuration) {
         this.height = height;
         this.width = width;
