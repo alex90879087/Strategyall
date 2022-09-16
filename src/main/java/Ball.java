@@ -14,6 +14,7 @@ public class Ball implements Subject {
     private Paint colour;
     private Strategy strat;
     private String col;
+    private int timer;
 
     public List<ObserverInterface> getObservers() {
         return observers;
@@ -34,7 +35,8 @@ public class Ball implements Subject {
     void tick() {
         xPos += xVel ;
         yPos += yVel;
-        this.alert();
+        if (timer % 120 == 0) this.alert();
+        timer += 1;
     }
 
     public void move(Strategy strat){
@@ -75,6 +77,7 @@ public class Ball implements Subject {
     public void alert() {
         for (ObserverInterface observer: observers){
             observer.update();
+            observer.printCoordinate();
         }
     }
 

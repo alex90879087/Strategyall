@@ -4,4 +4,5 @@ interface ObserverInterface {
     String getcol();
     double getxPos();
     double getyPos();
+    String[] printCoordinate();
 }

@@ -15,9 +15,12 @@ public class Observer implements ObserverInterface{
     public void update() {
         this.xpos = subject.getxPos();
         this.ypos = subject.getyPos();
-        System.out.printf("%s ball x position: %s\n", this.col, this.xpos);
-        System.out.printf("%s ball y position: %s\n", this.col, this.ypos);
+    }
 
+    public String[] printCoordinate(){
+        String x = new String(this.col + " ball's x coordinate is "+ (int) this.xpos);
+        String y = new String(this.col + " ball's y coordinate is "+ (int) this.ypos);
+        return new String[] {x,y};
     }
 
     @Override
