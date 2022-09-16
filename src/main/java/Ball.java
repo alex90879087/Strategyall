@@ -14,6 +14,11 @@ public class Ball implements Subject {
     private Paint colour;
     private Strategy strat;
     private String col;
+
+    public List<ObserverInterface> getObservers() {
+        return observers;
+    }
+
     private List<ObserverInterface> observers = new ArrayList<>();
 
     Ball(double startX, double startY, double startRadius, String colour) {
@@ -29,6 +34,7 @@ public class Ball implements Subject {
     void tick() {
         xPos += xVel ;
         yPos += yVel;
+        this.alert();
     }
 
     public void move(Strategy strat){

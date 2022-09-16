@@ -15,6 +15,9 @@ public class Observer implements ObserverInterface{
     public void update() {
         this.xpos = subject.getxPos();
         this.ypos = subject.getyPos();
+        System.out.printf("%s ball x position: %s\n", this.col, this.xpos);
+        System.out.printf("%s ball y position: %s\n", this.col, this.ypos);
+
     }
 
     @Override

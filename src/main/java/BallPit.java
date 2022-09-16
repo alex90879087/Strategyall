@@ -28,6 +28,9 @@ class BallPit {
         Observer redB = new Observer(red);
         Observer blackB = new Observer(black);
         Observer blueB = new Observer(blue);
+        red.getObservers().add(redB);
+        black.getObservers().add(blackB);
+        blue.getObservers().add(blueB);
     }
 
     double getHeight() {
