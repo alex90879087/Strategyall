@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-public class Ball implements Subject {
+public class Ball implements Subject, AbstractBall{
     private double xPos;
     private double yPos;
     private double radius;
@@ -22,7 +22,8 @@ public class Ball implements Subject {
 
     private List<ObserverInterface> observers = new ArrayList<>();
 
-    Ball(double startX, double startY, double startRadius, String colour) {
+
+    Ball(double startX, double startY, double startRadius, String colour, Strategy strategy) {
         this.xPos = startX;
         this.yPos = startY;
         this.radius = startRadius;
@@ -30,7 +31,29 @@ public class Ball implements Subject {
         this.col = colour.toLowerCase(Locale.ROOT);
         xVel = new Random().nextInt(5);
         yVel = new Random().nextInt(5);
+        this.strat = strategy;
+
     }
+
+    // constructor for clone()
+    public Ball(Ball ball) {
+        this.xPos = ball.xPos;
+        this.yPos = ball.yPos;
+        this.radius = ball.radius;
+        this.strat = ball.strat;
+        this.colour = Paint.valueOf(ball.col);
+        this.col = ball.col.toLowerCase(Locale.ROOT);
+
+        // random speed and direction
+        this.xVel = new Random().nextInt(5);
+        this.yVel = new Random().nextInt(5);
+    }
+
+    @Override
+    public AbstractBall copy() {
+        return new Ball(this);
+    }
+
 
     void tick() {
         xPos += xVel ;
@@ -103,16 +126,8 @@ public class Ball implements Subject {
         // Here is where the strategy should have some effect.
         // You can add parameters to the think method so the ball knows something about its
         // world to make decisions with, or you can inject things upon construction for it to query
-        if (getCol().equalsIgnoreCase("black")) {
-            this.move(new blackStrat());
-        }
-        else if (getCol().equalsIgnoreCase("red")){
-            this.move(new redStrat());
-        }
-        else if (getCol().equalsIgnoreCase("blue")){
-            this.move(new blueStrat(blueCollision));
-        }else{
-            System.out.println("New coloured ball detected!");
-        }
+        this.strat.move(this);
     }
+
+
 }

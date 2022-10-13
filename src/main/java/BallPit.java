@@ -3,6 +3,7 @@ import javafx.scene.paint.Paint;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 class BallPit {
     private final double height;
@@ -11,6 +12,7 @@ class BallPit {
     private final List<Ball> balls = new ArrayList<>();
     private long tickCount = 0;
     private boolean blueCollision;
+    private BallRegistry ballRegistry;
 
 
     BallPit(double width, double height, double frameDuration) {
@@ -19,9 +21,11 @@ class BallPit {
 
         g = 1.0 * frameDuration;
 
-        Ball red = new Ball(100, 100, 20, "RED");
-        Ball black = new Ball(200, 200, 20, "BLACK");
-        Ball blue = new Ball(300, 300, 20, "BLUE");
+        ballRegistry = new BallRegistry();
+
+        Ball red = new Ball(100, 100, 20, "RED", new redStrat());
+        Ball black = new Ball(200, 200, 20, "BLACK", new blackStrat());
+        Ball blue = new Ball(300, 300, 20, "BLUE", new blackStrat());
         balls.add(red);
         balls.add(black);
         balls.add(blue);
@@ -31,6 +35,11 @@ class BallPit {
         red.getObservers().add(redB);
         black.getObservers().add(blackB);
         blue.getObservers().add(blueB);
+    }
+
+    void spawnBall(String colour) {
+        this.balls.add(ballRegistry.addBall(colour));
+        System.out.println("A " + colour + " ball added!");
     }
 
     double getHeight() {
